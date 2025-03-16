@@ -20,9 +20,9 @@ export default function HabitsScreen() {
   ];
 
   const habitStreaks = [
-    { id: '1', habit: 'Exercise Daily', streak: 34 },
-    { id: '2', habit: 'Read 1 Chapter', streak: 24 },
-    { id: '3', habit: 'Drink Water', streak: 45 },
+    { id: '1', habit: 'Exercise Daily', streak: 24 },
+    { id: '2', habit: 'Read 1 Chapter', streak: 18 },
+    { id: '3', habit: 'Drink Water', streak: 36 },
   ];
 
   useEffect(() => {
@@ -36,7 +36,6 @@ export default function HabitsScreen() {
     for (let day = 1; day <= date; day++) {
       const dayStr = `${year}-${month}-${String(day).padStart(2, '0')}`;
 
-      // Add multi-colored dots for each habit
       days[dayStr] = {
         dots: habits.map(habit => ({
           key: habit.name,
@@ -66,7 +65,7 @@ export default function HabitsScreen() {
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Habit Streak Calendar</Text>
         <Calendar
-          markingType={'multi-dot'} // Multi-dot + custom styles
+          markingType={'multi-dot'} 
           markedDates={completedDays}
           style={styles.calendar}
           theme={{
