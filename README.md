@@ -1,14 +1,18 @@
-# macca-nynme
+# How to Run the iOS Application
 
-# to run nynme
-# 1. install dependencies (if not installed)
-# install Node.js
-# install Expo CLI 
-# terminal: "npm install -g expo-cli"
+# 1. Install dependencies (if not installed)
+install Node.js
+install Expo CLI 
+```bash
+npm install -g expo-cli
+```
 
+# 2. Install project dependencies
+```bash
+npm install
+```
 
-# 2. install project dependencies
-# terminal: "npm install"
-
-# 3. start the app
-# "npx expo start" 
+# 3. Start the app
+```bash
+npx expo start"
+```
