@@ -3,11 +3,11 @@ import { View, Text, StyleSheet, Image, FlatList, ImageBackground } from 'react-
 
 export default function LeaderboardScreen() {
   const leaderboardData = [
-    { id: '1', name: 'Bojack Benj', days: 45 },
-    { id: '2', name: 'Jane Walker', days: 36 },
-    { id: '3', name: 'Pauline Ko', days: 25 },
-    { id: '4', name: 'Pauline Ko', days: 2 },
+    { id: '1', name: 'Emily', days: 45, profile: require('../../assets/images/dog.jpg') },
+    { id: '2', name: 'Alex', days: 36, profile: require('../../assets/images/cat.jpg') },
+    { id: '3', name: 'Jessica', days: 25, profile: require('../../assets/images/frog.jpg') },
   ];
+  
 
 
   return (
@@ -25,7 +25,7 @@ export default function LeaderboardScreen() {
         {/* Second Place Stool */}
         <View style={[styles.stool, styles.secondStool]}>
           <Image 
-            source={require('../../assets/images/pfp.png')} 
+            source={require('../../assets/images/cat.jpg')} 
             style={[styles.pfp, styles.silverBorder]} 
           />
         </View>
@@ -33,7 +33,7 @@ export default function LeaderboardScreen() {
         {/* First Place Stool */}
         <View style={[styles.stool, styles.firstStool]}>
           <Image 
-            source={require('../../assets/images/pfp.png')} 
+            source={require('../../assets/images/dog.jpg')} 
             style={[styles.pfp, styles.goldBorder]} 
           />
           <Image source={require('../../assets/images/crown.png')} style={styles.crown} />
@@ -42,7 +42,7 @@ export default function LeaderboardScreen() {
         {/* Third Place Stool */}
         <View style={[styles.stool, styles.thirdStool]}>
           <Image 
-            source={require('../../assets/images/pfp.png')} 
+            source={require('../../assets/images/frog.jpg')} 
             style={[styles.pfp, styles.bronzeBorder]} 
           />
         </View>
@@ -50,24 +50,24 @@ export default function LeaderboardScreen() {
 
       {/* Leaderboard List */}
       <View style={styles.listContainer}>
-        <FlatList
-          data={leaderboardData}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item, index }) => (
-            <View style={styles.listItem}>
-              <Text style={styles.rank}>{index + 1}</Text>
-              <Image 
-                source={require('../../assets/images/pfp.png')} 
-                style={styles.listPfp} 
-              />
-              <Text style={styles.name}>{item.name}</Text>
-              <View style={styles.daysContainer}>
-                <Text style={styles.days}>{item.days} days</Text>
-                <Image source={require('../../assets/images/fire.png')} style={styles.fireIcon} />
-              </View>
+      <FlatList
+        data={leaderboardData}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item, index }) => (
+          <View style={styles.listItem}>
+            <Text style={styles.rank}>{index + 1}</Text>
+            <Image 
+              source={item.profile} 
+              style={styles.listPfp} 
+            />
+            <Text style={styles.name}>{item.name}</Text>
+            <View style={styles.daysContainer}>
+              <Text style={styles.days}>{item.days} days</Text>
+              <Image source={require('../../assets/images/fire.png')} style={styles.fireIcon} />
             </View>
-          )}
-        />
+          </View>
+        )}
+      />
       </View>
     </ImageBackground>
   );
@@ -86,20 +86,18 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 24, // slightly larger title
+    fontSize: 24, 
     fontWeight: '700',
   },
 
-  // Stools container
   stoolContainer: {
     flexDirection: 'row',
     top: 90,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    marginBottom: -10, // Move down closer to white background
+    marginBottom: -10,
   },
 
-  // Common stool styles
   stool: {
     width: 135, // Wider
     marginHorizontal: -12,
@@ -127,7 +125,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#69AB48',
   },
 
-  // Profile pics on stools
+  // Profile pics
   pfp: {
     width: 65,
     height: 65,
@@ -158,7 +156,7 @@ const styles = StyleSheet.create({
     top: -50,
   },
 
-  // Leaderboard List styling
+  // Leaderboard List 
   listContainer: {
     backgroundColor: '#fff',
     borderTopLeftRadius: 20,
@@ -166,7 +164,7 @@ const styles = StyleSheet.create({
     paddingTop: 25,
     paddingHorizontal: 20,
     flex: 1,
-    marginTop: 100, // Push it down lower
+    marginTop: 100, 
 
   },
 
@@ -182,7 +180,7 @@ const styles = StyleSheet.create({
   },
 
   listPfp: {
-    width: 45, // Larger profile pic
+    width: 45, 
     height: 45,
     borderRadius: 22.5,
     marginHorizontal: 12,
@@ -192,7 +190,7 @@ const styles = StyleSheet.create({
 
   name: {
     flex: 1,
-    fontSize: 18, // Larger text
+    fontSize: 18, 
   },
 
   daysContainer: {
@@ -201,12 +199,12 @@ const styles = StyleSheet.create({
   },
 
   days: {
-    fontSize: 16, // Larger days text
+    fontSize: 16,
     marginRight: 6,
   },
 
   fireIcon: {
-    width: 24, // Larger fire icon
+    width: 24, 
     height: 24,
   },
 });

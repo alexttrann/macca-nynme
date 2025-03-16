@@ -8,7 +8,8 @@ const samplePosts = [
     profileImage: require('../../assets/images/dog.jpg'),
     category: 'Exercise', 
     caption: 'Early morning walk 🚶', 
-    image: require('../../assets/images/steps.jpg') 
+    image: require('../../assets/images/steps.jpg'),
+    streak: 45, 
   },
   { 
     id: '2', 
@@ -16,7 +17,8 @@ const samplePosts = [
     profileImage: require('../../assets/images/cat.jpg'),
     category: 'Reading', 
     caption: 'This book is so good!!!', 
-    image: require('../../assets/images/reading.jpg') 
+    image: require('../../assets/images/reading.jpg'),
+    streak: 36,
   },
   { 
     id: '3', 
@@ -24,17 +26,29 @@ const samplePosts = [
     profileImage: require('../../assets/images/frog.jpg'),
     category: 'Water', 
     caption: 'Loving the healthy lifestyle 🌿✨', 
-    image: require('../../assets/images/water.jpg') 
+    image: require('../../assets/images/water.jpg'),
+    streak: 25,
   },
   { 
     id: '4', 
-    user: 'Emily', 
-    profileImage: require('../../assets/images/dog.jpg'),
+    user: 'Alex', 
+    profileImage: require('../../assets/images/cat.jpg'),
     category: 'Exercise', 
     caption: 'Gym day today 🏋️', 
-    image: require('../../assets/images/fitness.jpg') 
+    image: require('../../assets/images/fitness.jpg'),
+    streak: 36,
+  },
+  { 
+    id: '5', 
+    user: 'Jessica', 
+    profileImage: require('../../assets/images/frog.jpg'),
+    category: 'Reading', 
+    caption: 'Another day, another chapter 🤓', 
+    image: require('../../assets/images/reading2.jpg'),
+    streak: 25,
   },
 ];
+
 
 export default function HomeScreen() {
   const today = new Date();
@@ -58,7 +72,7 @@ export default function HomeScreen() {
     >
       <View style={styles.topContainer}>
         <Text style={styles.titleText}>{dateString}</Text>
-        <Text style={styles.subtitle}>new you, new me</Text>
+        {/* <Text style={styles.subtitle}>new you, new me</Text> */}
 
         {/* Filter Buttons */}
         <View style={styles.filterContainer}>
@@ -86,9 +100,18 @@ export default function HomeScreen() {
           <View style={styles.postItem}>
             {/* User Info */}
             <View style={styles.userInfo}>
-              <Image source={item.profileImage} style={styles.profileImage} />
-              <Text style={styles.username}>{item.user}</Text>
+              <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+                <Image source={item.profileImage} style={styles.profileImage} />
+                <Text style={styles.username}>{item.user}</Text>
+              </View>
+
+              <View style={styles.streakContainer}>
+                <Text style={styles.streakText}>{item.streak}d</Text>
+                <Image source={require('../../assets/images/fire.png')} style={styles.fireIcon} />
+              </View>
             </View>
+
+
 
             {/* Post Image */}
             <Image source={item.image} style={styles.postImage} />
@@ -127,6 +150,7 @@ const styles = StyleSheet.create({
   filterContainer: {
     flexDirection: 'row',
     marginTop: 20,
+    marginBottom: 10,
   },
   filterButton: {
     backgroundColor: '#ccc',
@@ -192,4 +216,22 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     paddingHorizontal: 10,
   },
+  streakContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 'auto',
+    paddingRight: 10,
+  },
+  
+  streakText: {
+    fontSize: 14,
+    color: '#666',
+    marginRight: 4,
+  },
+  
+  fireIcon: {
+    width: 18,
+    height: 18,
+  },
+  
 });
