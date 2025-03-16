@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'center',
     marginBottom: 20,
-    color: '#fff',
+
   },
   calendar: {
     marginHorizontal: 10,

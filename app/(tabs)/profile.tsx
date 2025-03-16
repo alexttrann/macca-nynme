@@ -13,7 +13,7 @@ export default function ProfileScreen() {
       style={styles.container}
     >
       {/* Header Title */}
-      <Text style={styles.headerText}>Post a habit</Text>
+      <Text style={styles.headerText}>Profile</Text>
 
       {/* Profile Info */}
       <View style={styles.profileContainer}>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   headerText: {
-    color: 'white',
+
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'center',
