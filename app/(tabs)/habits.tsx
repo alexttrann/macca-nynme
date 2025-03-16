@@ -20,9 +20,9 @@ export default function HabitsScreen() {
   ];
 
   const habitStreaks = [
-    { id: '1', habit: 'Exercise Daily', streak: 34 },
-    { id: '2', habit: 'Read 1 Chapter', streak: 24 },
-    { id: '3', habit: 'Drink Water', streak: 45 },
+    { id: '1', habit: 'Exercise Daily', streak: 34, color: '#FF6B6B' },
+    { id: '2', habit: 'Read 1 Chapter', streak: 24, color: '#4ECDC4' },
+    { id: '3', habit: 'Drink Water', streak: 45, color: '#FFD93D' },
   ];
 
   useEffect(() => {
@@ -36,7 +36,7 @@ export default function HabitsScreen() {
     for (let day = 1; day <= date; day++) {
       const dayStr = `${year}-${month}-${String(day).padStart(2, '0')}`;
 
-      // Add multi-colored dots for each habit
+
       days[dayStr] = {
         dots: habits.map(habit => ({
           key: habit.name,
@@ -66,7 +66,7 @@ export default function HabitsScreen() {
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Habit Streak Calendar</Text>
         <Calendar
-          markingType={'multi-dot'} // Multi-dot + custom styles
+          markingType={'multi-dot'}
           markedDates={completedDays}
           style={styles.calendar}
           theme={{
@@ -76,14 +76,19 @@ export default function HabitsScreen() {
           }}
         />
 
-        {/* Habit Streak List */}
+        {}
         <View style={styles.listContainer}>
           <FlatList
             data={habitStreaks}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <View style={styles.listItem}>
-                <Text style={styles.habitText}>{item.habit}</Text>
+                <View style={styles.habitLeft}>
+                  {}
+                  <View style={[styles.colorDot, { backgroundColor: item.color }]} />
+                  <Text style={styles.habitText}>{item.habit}</Text>
+                </View>
+
                 <View style={styles.streakInfo}>
                   <Text style={styles.streakText}>{item.streak} days</Text>
                   <Image source={require('../../assets/images/fire.png')} style={styles.fireIcon} />
@@ -138,6 +143,16 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginVertical: 12,
+  },
+  habitLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  colorDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    marginRight: 8,
   },
   habitText: {
     fontSize: 16,
