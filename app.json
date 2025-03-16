@@ -14,7 +14,10 @@
       "backgroundColor": "#96DF72"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+    "NSCameraUsageDescription": "This app uses the camera to capture photos."
+  }
     },
     "android": {
       "adaptiveIcon": {
