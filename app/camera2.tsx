@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Button, Alert, Platform, ToastAndroid } from 'react-native';
 import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
-import { useRouter } from 'expo-router';
+import { useRouter, Stack } from 'expo-router';
 
 export default function Camera2() {
   const [facing, setFacing] = useState<CameraType>('back');
@@ -9,6 +9,7 @@ export default function Camera2() {
   const cameraRef = useRef(null);
   const router = useRouter();
 
+  // Requesting permission
   if (!permission) return <View />;
 
   if (!permission.granted) {
@@ -20,23 +21,23 @@ export default function Camera2() {
     );
   }
 
-  // Flip camera
+  // Flip between front/back camera
   const toggleCameraFacing = () => {
     setFacing((current) => (current === 'back' ? 'front' : 'back'));
   };
 
-  // Take photo & go back
+  // Take picture and return to previous screen
   const takePhoto = async () => {
     if (cameraRef.current) {
       try {
         const photo = await cameraRef.current.takePictureAsync();
         console.log('Photo taken:', photo.uri);
 
-        // Show popup
+        // Popup message
         if (Platform.OS === 'android') {
-          ToastAndroid.show('Image updated!', ToastAndroid.SHORT);
+          ToastAndroid.show('Good Job, +1 Streak!', ToastAndroid.SHORT);
         } else {
-          Alert.alert('Image updated!');
+          Alert.alert('Good Job, +1 Streak!');
         }
 
         // Navigate back
@@ -49,26 +50,37 @@ export default function Camera2() {
   };
 
   return (
-    <View style={styles.container}>
-      <CameraView
-        style={styles.camera}
-        facing={facing}
-        ref={cameraRef}
-      >
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
-            <Text style={styles.text}>Flip Camera</Text>
+    <>
+      {/* Customize header title and back button */}
+      <Stack.Screen
+        options={{
+          headerTitle: 'Camera',
+          headerBackTitle: 'Back',
+        }}
+      />
+
+      <View style={styles.container}>
+        {/* Camera Preview */}
+        <CameraView
+          style={styles.camera}
+          facing={facing}
+          ref={cameraRef}
+        >
+          <View style={styles.buttonContainer}>
+            <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+              <Text style={styles.text}>Flip Camera</Text>
+            </TouchableOpacity>
+          </View>
+        </CameraView>
+
+        {/* Capture Button */}
+        <View style={styles.captureContainer}>
+          <TouchableOpacity style={styles.captureButton} onPress={takePhoto}>
+            <Text style={styles.captureText}>Take Photo</Text>
           </TouchableOpacity>
         </View>
-      </CameraView>
-
-      {/* Capture Button */}
-      <View style={styles.captureContainer}>
-        <TouchableOpacity style={styles.captureButton} onPress={takePhoto}>
-          <Text style={styles.captureText}>Take Photo</Text>
-        </TouchableOpacity>
       </View>
-    </View>
+    </>
   );
 }
 
