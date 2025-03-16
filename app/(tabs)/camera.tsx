@@ -5,7 +5,7 @@ import { useRouter } from 'expo-router';
 export default function NotificationsScreen() {
   const router = useRouter();
 
-  const habits = ['Exercise Daily', 'Read 10 pages', 'Drink Water'];
+  const habits = ['Exercise Daily', 'Read 1 Chapter', 'Drink Water'];
 
   return (
     <ImageBackground 
@@ -15,7 +15,8 @@ export default function NotificationsScreen() {
       <View style={styles.contentContainer}>
         {/* Top title/header */}
         <View style={styles.header}>
-          <Text style={styles.title}>Post a habit</Text>
+          <Text style={styles.title}>Post a Habit</Text>
+          <Text style={styles.subtitle}>Take a photo to continue your streak 🔥</Text>
         </View>
 
         {/* Habit buttons */}
@@ -24,7 +25,7 @@ export default function NotificationsScreen() {
             <TouchableOpacity 
               key={index} 
               style={styles.habitButton}
-              onPress={() => router.push('/camera2')} // ✅ Linking here
+              onPress={() => router.push('/camera2')} 
             >
               <Text style={styles.habitText}>{habit}</Text>
             </TouchableOpacity>
@@ -33,7 +34,7 @@ export default function NotificationsScreen() {
           {/* Customise button */}
           <TouchableOpacity 
             style={styles.customiseButton}
-            onPress={() => router.push('/camera2')} // ✅ Linking here too
+            onPress={() => router.push('/camera2')}
           >
             <Text style={styles.customiseText}>Customise</Text>
           </TouchableOpacity>
@@ -50,17 +51,20 @@ const styles = StyleSheet.create({
 
   contentContainer: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     alignItems: 'center',
+    paddingTop: 150, 
   },
 
   header: {
     marginBottom: 20,
+    alignItems: 'center',
   },
 
   title: {
     fontSize: 22,
     fontWeight: '700',
+    alignItems: 'center',
   },
 
   habitContainer: {
@@ -98,5 +102,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 16,
+    marginTop: 10,
   },
 });

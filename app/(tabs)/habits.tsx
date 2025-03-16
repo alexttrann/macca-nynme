@@ -1,17 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, Text, ImageBackground } from 'react-native';
+import { View, StyleSheet, Text, ImageBackground, FlatList, Image } from 'react-native';
 import { Calendar } from 'react-native-calendars';
 
 type MarkedDateProps = {
-  marked?: boolean;
-  dotColor?: string;
+  dots?: { key: string; color: string }[];
   customStyles?: {
     container?: object;
+    text?: object;
   };
 };
 
 export default function HabitsScreen() {
   const [completedDays, setCompletedDays] = useState<Record<string, MarkedDateProps>>({});
+
+  const habits = [
+    { name: 'Exercise', color: '#FF6B6B' },
+    { name: 'Reading', color: '#4ECDC4' },
+    { name: 'Water', color: '#FFD93D' },
+  ];
+
+  const habitStreaks = [
+    { id: '1', habit: 'Exercise Daily', streak: 34 },
+    { id: '2', habit: 'Read 1 Chapter', streak: 24 },
+    { id: '3', habit: 'Drink Water', streak: 45 },
+  ];
 
   useEffect(() => {
     const today = new Date();
@@ -20,13 +32,25 @@ export default function HabitsScreen() {
     const date = today.getDate();
 
     const days: Record<string, MarkedDateProps> = {};
+
     for (let day = 1; day <= date; day++) {
       const dayStr = `${year}-${month}-${String(day).padStart(2, '0')}`;
+
+      // Add multi-colored dots for each habit
       days[dayStr] = {
-        marked: true,
-        dotColor: '#96DF72',
+        dots: habits.map(habit => ({
+          key: habit.name,
+          color: habit.color,
+        })),
         customStyles: {
-          container: { borderWidth: 2, borderColor: '#96DF72', borderRadius: 999 },
+          container: {
+            borderWidth: 4,
+            borderColor: '#96DF72',
+            borderRadius: 999,
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
+          text: { color: '#333' },
         },
       };
     }
@@ -42,15 +66,33 @@ export default function HabitsScreen() {
       <View style={styles.innerContainer}>
         <Text style={styles.title}>Habit Streak Calendar</Text>
         <Calendar
-          markingType={'custom'}
+          markingType={'multi-dot'} // Multi-dot + custom styles
           markedDates={completedDays}
           style={styles.calendar}
           theme={{
             selectedDayBackgroundColor: '#96DF72',
             todayTextColor: '#96DF72',
-            calendarBackground: 'rgba(255,255,255,0.7)',
+            calendarBackground: '#ffffff',
           }}
         />
+
+        {/* Habit Streak List */}
+        <View style={styles.listContainer}>
+          <FlatList
+            data={habitStreaks}
+            keyExtractor={(item) => item.id}
+            renderItem={({ item }) => (
+              <View style={styles.listItem}>
+                <Text style={styles.habitText}>{item.habit}</Text>
+                <View style={styles.streakInfo}>
+                  <Text style={styles.streakText}>{item.streak} days</Text>
+                  <Image source={require('../../assets/images/fire.png')} style={styles.fireIcon} />
+                </View>
+              </View>
+            )}
+          />
+        </View>
+
       </View>
     </ImageBackground>
   );
@@ -62,7 +104,8 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
     flex: 1,
-    paddingTop: 60,
+    paddingTop: 30,
+    justifyContent: 'flex-start',
   },
   title: {
     fontSize: 20,
@@ -74,5 +117,44 @@ const styles = StyleSheet.create({
   calendar: {
     marginHorizontal: 10,
     borderRadius: 10,
+    backgroundColor: '#fff',
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    marginBottom: 10,
+  },
+  listContainer: {
+    marginTop: 15,
+    marginHorizontal: 20,
+    backgroundColor: '#ffffff',
+    borderRadius: 12,
+    padding: 15,
+    elevation: 4,
+  },
+  listItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginVertical: 12,
+  },
+  habitText: {
+    fontSize: 16,
+    color: '#333',
+    fontWeight: '500',
+  },
+  streakInfo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  streakText: {
+    fontSize: 16,
+    marginRight: 8,
+    color: '#666',
+  },
+  fireIcon: {
+    width: 20,
+    height: 20,
   },
 });

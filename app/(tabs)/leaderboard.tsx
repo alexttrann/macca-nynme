@@ -80,7 +80,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    paddingTop: 60,
+    paddingTop: 40,
     alignItems: 'center',
     marginBottom: 10,
   },
