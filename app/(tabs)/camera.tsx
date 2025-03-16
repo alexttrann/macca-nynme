@@ -1,7 +1,10 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native';
+import { useRouter } from 'expo-router';
 
 export default function NotificationsScreen() {
+  const router = useRouter();
+
   const habits = ['Exercise Daily', 'Read 10 pages', 'Drink Water'];
 
   return (
@@ -18,13 +21,20 @@ export default function NotificationsScreen() {
         {/* Habit buttons */}
         <View style={styles.habitContainer}>
           {habits.map((habit, index) => (
-            <TouchableOpacity key={index} style={styles.habitButton}>
+            <TouchableOpacity 
+              key={index} 
+              style={styles.habitButton}
+              onPress={() => router.push('/camera2')} // ✅ Linking here
+            >
               <Text style={styles.habitText}>{habit}</Text>
             </TouchableOpacity>
           ))}
 
           {/* Customise button */}
-          <TouchableOpacity style={styles.customiseButton}>
+          <TouchableOpacity 
+            style={styles.customiseButton}
+            onPress={() => router.push('/camera2')} // ✅ Linking here too
+          >
             <Text style={styles.customiseText}>Customise</Text>
           </TouchableOpacity>
         </View>
@@ -40,18 +50,17 @@ const styles = StyleSheet.create({
 
   contentContainer: {
     flex: 1,
-    justifyContent: 'center', // Center everything vertically
+    justifyContent: 'center',
     alignItems: 'center',
   },
 
   header: {
-    marginBottom: 20, // Space between header & buttons
+    marginBottom: 20,
   },
 
   title: {
     fontSize: 22,
     fontWeight: '700',
-    color: '#fff',
   },
 
   habitContainer: {
