@@ -20,9 +20,9 @@ export default function HabitsScreen() {
   ];
 
   const habitStreaks = [
-    { id: '1', habit: 'Exercise Daily', streak: 34, color: '#FF6B6B' },
-    { id: '2', habit: 'Read 1 Chapter', streak: 24, color: '#4ECDC4' },
-    { id: '3', habit: 'Drink Water', streak: 45, color: '#FFD93D' },
+    { id: '1', habit: 'Exercise Daily', streak: 24, color: '#FF6B6B' },
+    { id: '2', habit: 'Read 1 Chapter', streak: 18, color: '#4ECDC4' },
+    { id: '3', habit: 'Drink Water', streak: 36, color: '#FFD93D' },
   ];
 
   useEffect(() => {
