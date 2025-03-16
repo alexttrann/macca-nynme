@@ -1,8 +1,7 @@
 # How to Run the iOS Application
 
 # 1. Install dependencies (if not installed)
-install Node.js
-install Expo CLI 
+Install Node.js and install Expo CLI 
 ```bash
 npm install -g expo-cli
 ```
