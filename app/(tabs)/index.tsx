@@ -8,7 +8,7 @@ export default function HomeScreen() {
       style={styles.container}
     >
       <View style={styles.container}>
-        <Text style={styles.titleText}>🐸 Hello, welcome to Nynme! 🌿</Text>
+        <Text style={styles.titleText}>🐸 Nynme! 🌿</Text>
         <Text style={styles.subtitle}>new you, new me</Text>
       </View>
     </ImageBackground>
